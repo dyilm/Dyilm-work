@@ -1,5 +1,6 @@
 // Includes
-var express = require('express');
+const express = require('express');
+const path = require('path');
 
 // App init
 var app = express();
@@ -12,5 +13,9 @@ var server = app.listen(3000,function(){
 /* Home */
     //GET
 app.get('/', function (req, res) {
-  res.send('Homepage');
+    res.send('Homepage');
+});
+    //PUT
+app.put('/', function (req, res) {
+    res.sendFile(path.join(__dirname,'index.html'));
 })
