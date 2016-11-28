@@ -18,4 +18,10 @@ app.get('/', function (req, res) {
     //PUT
 app.put('/', function (req, res) {
     res.sendFile(path.join(__dirname,'index.html'));
-})
+});
+    //DELETE
+app.delete('/', function (req, res) {
+    res.json({
+        "bien" : "bien?"
+    });
+});
