@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
+const request = require('request');
+const fs = require('fs');
 
 // DB Init
 mongoose.connect('mongodb://localhost/students');   // Connexion à la base
@@ -109,3 +111,23 @@ app.post('/people/post', urlencodedParser, function (req, res) {
   console.log(req.body);
   res.json(req.body);
 })
+
+/* Number */
+app.get('/number/:id([0-9]+)', function (req, res) {
+    res.send('Le nombre est '+req.params.id);
+})
+
+app.get('/number/:id([a-z]+)', function (req, res) {
+    res.send('Le texte est '+req.params.id);
+})
+
+/* 9-17 */
+request('https://jsonplaceholder.typicode.com/posts/1', function (err, res, body) {
+    if(!err){
+        console.log(body);
+    }
+})
+
+request('https://jsonplaceholder.typicode.com/posts/1')
+    .pipe(fs.createWriteStream('weather.json'));
+/*_9-17 */
