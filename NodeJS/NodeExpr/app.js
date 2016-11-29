@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 // DB Init
 mongoose.connect('mongodb://localhost/students');   // Connexion à la base
@@ -12,6 +13,14 @@ mongoose.Promise = global.Promise; //Error message 4 promises
 var app = express();
 app.set('view engine', 'pug');
 app.set('views', './views');
+
+// Session init
+app.use(session({
+  secret: 'dyilm',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { }
+}))
 
 // Listen to 3000 port
 var server = app.listen(3000,function(){
@@ -55,8 +64,22 @@ app.delete('/', function (req, res) {
 
 /* Test Pug */
 app.get('/pug', function (req, res) {
-  res.render('test-pug', { v_itsABoolean: true })
+  res.render('test-pug', { v_itsABoolean: true });
 });
 app.get('/pug-2', function (req, res) {
-  res.render('test-pug-2', { v_paramHTML: 'coucou <strong>TOI</strong>' })
-})
+  res.render('test-pug-2', { v_paramHTML: 'coucou <strong>TOI</strong>' });
+});
+
+/* Session */
+app.get('/setname', function (req, res) {
+    var sess = req.session;
+    sess.dyilmname = 'Yilmaz';
+    console.log('set session');
+    res.end();
+});
+app.get('/getname', function (req, res) {
+    var sess = req.session;
+    res.locals.se
+    console.log('Session: '+sess.dyilmname);
+    res.send(sess.dyilmname);
+});
