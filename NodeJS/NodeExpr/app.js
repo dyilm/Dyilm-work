@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 
 // DB Init
 mongoose.connect('mongodb://localhost/students');   // Connexion à la base
@@ -13,6 +15,14 @@ mongoose.Promise = global.Promise; //Error message 4 promises
 var app = express();
 app.set('view engine', 'pug');
 app.set('views', './views');
+app.use(methodOverride('_method')); // override with POST having ?_method=DELETE
+
+// Body Parser
+// create application/json parser
+var jsonParser = bodyParser.json()
+
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // Session init
 app.use(session({
@@ -66,6 +76,7 @@ app.delete('/', function (req, res) {
 app.get('/pug', function (req, res) {
   res.render('test-pug', { v_itsABoolean: true });
 });
+
 app.get('/pug-2', function (req, res) {
   res.render('test-pug-2', { v_paramHTML: 'coucou <strong>TOI</strong>' });
 });
@@ -83,3 +94,18 @@ app.get('/getname', function (req, res) {
     console.log('Session: '+sess.dyilmname);
     res.send(sess.dyilmname);
 });
+
+/* People */
+    // GET
+app.get('/people', function (req, res) {
+    res.render('get-people', {});
+});
+app.get('/people/get', function (req, res) {
+    res.json(req.query);
+});
+    // POST
+app.post('/people/post', urlencodedParser, function (req, res) {
+  if (!req.body) return res.sendStatus(400)
+  console.log(req.body);
+  res.json(req.body);
+})

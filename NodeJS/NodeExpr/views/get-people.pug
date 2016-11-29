@@ -1,0 +1,30 @@
+doctype html
+html(lang="fr")
+    head
+        title NodExpr - GET people
+    body
+        h1 People
+
+        p Methode POST
+        form(method="POST" action="/people/post")
+            div
+                label Prenom
+                br
+                input(type="text" name="firstname")
+            div
+                label Nom
+                br
+                input(type="text" name="name")
+            button(type="submit") Envoyer
+
+        p Methode GET
+        form(method="GET" action="/people/get")
+            div
+                label Prenom
+                br
+                input(type="text" name="firstname")
+            div
+                label Nom
+                br
+                input(type="text" name="name")
+            button(type="submit") Envoyer
