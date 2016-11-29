@@ -10,6 +10,8 @@ mongoose.Promise = global.Promise; //Error message 4 promises
 
 // App init
 var app = express();
+app.set('view engine', 'pug');
+app.set('views', './views');
 
 // Listen to 3000 port
 var server = app.listen(3000,function(){
@@ -21,7 +23,7 @@ var server = app.listen(3000,function(){
 app.get('/', function (req, res) {
     Student.find(null, function (err, students) {
         if (err) { throw err; }
-        res.json(students);
+        res.render('index', { v_students: students })
     });
 });
     //POST
@@ -50,3 +52,11 @@ app.delete('/', function (req, res) {
         "bien" : "bien?"
     });
 });
+
+/* Test Pug */
+app.get('/pug', function (req, res) {
+  res.render('test-pug', { v_itsABoolean: true })
+});
+app.get('/pug-2', function (req, res) {
+  res.render('test-pug-2', { v_paramHTML: 'coucou <strong>TOI</strong>' })
+})
