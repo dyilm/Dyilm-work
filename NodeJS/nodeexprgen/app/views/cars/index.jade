@@ -1,0 +1,8 @@
+extends ../layout
+
+block content
+    h1 Cars list
+
+    ul
+        each car in cars
+            li= car.dataValues.brand+' - '+car.dataValues.km

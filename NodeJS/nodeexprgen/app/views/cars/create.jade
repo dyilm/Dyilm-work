@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    h1 Add a car
+    form(method="POST", action="/cars")
+        div
+            label Brand
+            br
+            input(type="text", name="brand")
+        div
+            label Km
+            br
+            input(type="number", name="km")
+        div
+            button(type="submit") Valider
