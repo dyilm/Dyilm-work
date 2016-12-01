@@ -1,5 +1,11 @@
 extends ../layout
 
 block content
-  h1= title
-  p= txt_content
+    h1 Users list
+
+    if islogged
+        p logged
+
+    ul
+        each user in v_users
+            li= user

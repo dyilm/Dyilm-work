@@ -10,6 +10,11 @@ router.get('/', users.index);
 /* GET Création d'un nouvel utilisateur */
 router.get('/subscribe', users.subscribe);
 
+/* GET Création d'un nouvel utilisateur */
+router.get('/login', users.login_get);
+router.post('/login', users.login_post);
+
+
 /* POST Création d'un nouvel utilisateur */
 router.post('/', users.create);
 

@@ -92,7 +92,6 @@ app.get('/setname', function (req, res) {
 });
 app.get('/getname', function (req, res) {
     var sess = req.session;
-    res.locals.se
     console.log('Session: '+sess.dyilmname);
     res.send(sess.dyilmname);
 });

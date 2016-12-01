@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
@@ -11,6 +12,14 @@ var index = require('./app/routes/index');
 var users = require('./app/routes/users');
 
 var app = express();
+
+// Session init
+app.use(session({
+  secret: 'weHVpQDN',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { }
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'));
@@ -44,6 +53,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 /* Connexion Base de donné
  ========================== */

@@ -6,10 +6,38 @@ var Users = {
      * @param res Ce qui est renvoyé au navigateur
      */
     index: function(req, res) {
-        res.render('users/index', {
-            "title": "nodeexprgen - Users",
-            'txt_content': 'GET users'
+        User.find(null, function (err, users) {
+            if (err) { throw err; }
+            res.render('users/index', {
+                "title": "nodeexprgen - Users",
+                'v_users': users,
+                'islogged' : req.session.dlogged
+            });
         });
+
+    },
+    login_get: function (req, res) {
+        res.render('users/login');
+    },
+    login_post: function (req, res) {
+        if(req.body.username && req.body.password){
+
+            User.find({
+                'username': req.body.username,
+                'password': req.body.password
+            }, function (err, users_find) {
+                if (err) return handleError(err);
+
+                if(users_find.length> 0){
+                    req.session.logged = true;
+                    res.redirect('/users');
+                }else {
+                    res.redirect('/users/login')
+                }
+
+                res.end();
+            });
+        }
     },
     subscribe: function(req, res) {
         res.render('users/create');

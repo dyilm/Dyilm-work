@@ -1,8 +1,8 @@
 extends ../layout
 
 block content
-    h1 Register
-    form(method="POST", action="/users")
+    h1 Login
+    form(method="POST", action="/users/login")
         div
             label Username
             br
@@ -11,9 +11,5 @@ block content
             label Password
             br
             input(type="text", name="password")
-        div
-            label Email
-            br
-            input(type="text", name="email")
         div
             button(type="submit") Valider
