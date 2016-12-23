@@ -1,1 +1,19 @@
-Hello World!
+{% extends '::base.html.twig' %}
+{% block title %}Actualités{% endblock %}
+
+{% block body %}
+    <h1>Actualités</h1>
+
+    {% for news in arrnews %}
+        <article class="blog">
+            <header>
+                <div class="date"><time datetime="{{ news.created|date('c') }}">{{ news.created|date('') }}</time></div>
+                <h2>{{ news.title }}</h2>
+            </header>
+            <div>
+                <p>{{ news.content|truncate(210, true)  }}</p>
+            </div>
+        </article>
+        <hr/>
+    {% endfor %}
+{% endblock %}

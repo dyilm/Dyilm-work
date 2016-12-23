@@ -1,0 +1,27 @@
+NewsBundle\Entity\News:
+    type: entity
+    table: null
+    repositoryClass: NewsBundle\Repository\NewsRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        content:
+            type: string
+            length: '1000'
+        author:
+            type: string
+            length: 255
+        created:
+            type: datetime
+            nullable: true
+        updated:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

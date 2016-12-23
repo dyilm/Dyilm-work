@@ -1,6 +1,10 @@
+badge:
+    resource: "@BadgeBundle/Resources/config/routing.yml"
+    prefix:   "/badge"
+
 news:
     resource: "@NewsBundle/Resources/config/routing.yml"
-    prefix:   "/news"
+    prefix:   "/"
 
 app:
     resource: "@AppBundle/Controller/"
